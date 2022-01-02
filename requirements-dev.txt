@@ -1,0 +1,5 @@
+-r requirements.txt
+black ~= 21.12b0
+mypy ~= 0.930
+pre-commit ~= 2.16
+pylint ~= 2.12

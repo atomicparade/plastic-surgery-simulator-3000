@@ -1,0 +1,34 @@
+repos:
+-   repo: local
+    hooks:
+    -   id: black
+        name: black
+        entry: black .
+        language: system
+        types_or: [python, pyi, toml]
+        always_run: true
+        pass_filenames: true
+        fail_fast: true
+    -   id: pylint
+        name: pylint
+        entry: pylint
+        language: system
+        types_or: [python, pyi]
+        always_run: true
+        pass_filenames: true
+        fail_fast: true
+    -   id: mypy
+        name: mypy
+        entry: mypy --strict
+        language: system
+        types_or: [python, pyi]
+        always_run: true
+        pass_filenames: true
+        fail_fast: true
+    -   id: unittest
+        name: unittest
+        entry: python -m unittest discover
+        language: system
+        always_run: true
+        pass_filenames: false
+        fail_fast: true
