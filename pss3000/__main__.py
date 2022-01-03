@@ -63,9 +63,13 @@ if not discord_bot_token:
 
 bot = hikari.GatewayBot(discord_bot_token)
 
-client = tanjun.Client.from_gateway_bot(
-    bot,
-    declare_global_commands=guild_ids,
-).load_modules("pss3000.commands.miscellaneous")
+client = (
+    tanjun.Client.from_gateway_bot(
+        bot,
+        declare_global_commands=guild_ids,
+    )
+    .load_modules("pss3000.commands.miscellaneous")
+    .load_modules("pss3000.commands.meme")
+)
 
 bot.run()
