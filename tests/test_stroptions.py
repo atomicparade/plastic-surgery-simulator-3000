@@ -88,3 +88,11 @@ class TestStrOptions(unittest.TestCase):
             _x = str_options.option_four
 
         self.assertRaises(IndexError, get_invalid_attr)
+
+    def test_option_with_non_alphanumeric_chars(self) -> None:
+        str_options = StrOptions("I'm_just.   Testing-things.out.   Success?")
+
+        self.assertEqual(
+            str_options.im_just_testing_things_out_success,
+            "I'm_just.   Testing-things.out.   Success?",
+        )
