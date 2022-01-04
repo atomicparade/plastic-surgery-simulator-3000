@@ -68,3 +68,23 @@ class TestStrOptions(unittest.TestCase):
             )
 
         self.assertRaises(ValueError, construct_with_invalid_default)
+
+    def test_getattr(self) -> None:
+        str_options = StrOptions("Option one", "Option two", "Option three")
+        self.assertEqual(str_options.option_one, "Option one")
+        self.assertEqual(str_options.option_two, "Option two")
+        self.assertEqual(str_options.option_three, "Option three")
+
+    def test_getattr_wrong_case(self) -> None:
+        def get_invalid_attr() -> None:
+            str_options = StrOptions("Option one", "Option two", "Option three")
+            _x = str_options.Option_one
+
+        self.assertRaises(IndexError, get_invalid_attr)
+
+    def test_getattr_nonexistent(self) -> None:
+        def get_invalid_attr() -> None:
+            str_options = StrOptions("Option one", "Option two", "Option three")
+            _x = str_options.option_four
+
+        self.assertRaises(IndexError, get_invalid_attr)
