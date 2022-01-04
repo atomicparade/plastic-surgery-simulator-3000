@@ -2,12 +2,48 @@
 import hikari
 import tanjun
 
+from pss3000.commands.common import StrOptions
+
 meme_commands = tanjun.slash_command_group(
     "meme",
     "Meme-related commands",
 )
 
-# TODO: Make str slash options enums?
+flip_options = StrOptions(
+    "Do not flip",
+    "Flip horizontally",
+    "Flip vertically",
+    "Flip both horizontally and vertically",
+)
+
+make_square_options = StrOptions(
+    "Do not squish into a square",
+    "Squish into a square",
+)
+
+invert_colours_options = StrOptions(
+    "Do not invert colours",
+    "Invert colours",
+)
+
+make_monochrome_options = StrOptions(
+    "Do not make monochrome",
+    "Make monochrome",
+)
+
+deep_fry_options = StrOptions(
+    "Do not deep-fry",
+    "Just a little",
+    "That's a lot of oil",
+    "Very burnt",
+)
+
+blur_options = StrOptions(
+    "Do not blur",
+    "Just a little",
+    "Where are my glasses?",
+    "Help",
+)
 
 
 @meme_commands.with_command
@@ -18,40 +54,26 @@ meme_commands = tanjun.slash_command_group(
 @tanjun.with_str_slash_option(
     "flip",
     "Whether to flip the image (default = do not)",
-    choices=[
-        "Do not flip",
-        "Flip horizontally",
-        "Flip vertically",
-        "Flip both horizontally and vertically",
-    ],
-    default="Do not flip",
+    choices=list(flip_options),
+    default=flip_options.default,
 )
 @tanjun.with_str_slash_option(
     "make_square",
     "Whether to squish the image into a square (default = do not)",
-    choices=[
-        "Do not squish into a square",
-        "Squish into a square",
-    ],
-    default="Do not squish into a square",
+    choices=list(make_square_options),
+    default=make_square_options.default,
 )
 @tanjun.with_str_slash_option(
     "invert_colours",
     "Whether to invert the image's colours (default = do not)",
-    choices=[
-        "Do not invert colours",
-        "Invert colours",
-    ],
-    default="Do not invert colours",
+    choices=list(invert_colours_options),
+    default=invert_colours_options.default,
 )
 @tanjun.with_str_slash_option(
     "make_monochrome",
     "Whether to turn the image black-and-white (default = do not)",
-    choices=[
-        "Do not make monochrome",
-        "Make monochrome",
-    ],
-    default="Do not make monochrome",
+    choices=list(make_monochrome_options),
+    default=make_monochrome_options.default,
 )
 @tanjun.with_int_slash_option(
     "rotate",
@@ -61,24 +83,14 @@ meme_commands = tanjun.slash_command_group(
 @tanjun.with_str_slash_option(
     "deep_fry",
     "How much to deep-fry the image",
-    choices=[
-        "Do not deep-fry",
-        "Just a little",
-        "That's a lot of oil",
-        "Very burnt",
-    ],
-    default="Do not deep-fry",
+    choices=list(deep_fry_options),
+    default=deep_fry_options.default,
 )
 @tanjun.with_str_slash_option(
     "blur",
     "How much to blur the image (0 to 100; default = 0/do not blur)",
-    choices=[
-        "Do not blur",
-        "Just a little",
-        "Where are my glasses?",
-        "Help",
-    ],
-    default="Do not blur",
+    choices=list(blur_options),
+    default=blur_options.default,
 )
 @tanjun.as_slash_command(
     "create",
