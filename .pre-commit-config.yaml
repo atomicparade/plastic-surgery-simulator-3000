@@ -6,7 +6,7 @@ repos:
         entry: black .
         language: system
         types_or: [python, pyi, toml]
-        always_run: true
+        always_run: false
         pass_filenames: true
         fail_fast: true
     -   id: pylint
@@ -14,7 +14,7 @@ repos:
         entry: pylint
         language: system
         types_or: [python, pyi]
-        always_run: true
+        always_run: false
         pass_filenames: true
         fail_fast: true
     -   id: mypy
@@ -22,7 +22,7 @@ repos:
         entry: mypy --strict
         language: system
         types_or: [python, pyi]
-        always_run: true
+        always_run: false
         pass_filenames: true
         fail_fast: true
     -   id: unittest
