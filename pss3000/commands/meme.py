@@ -1,8 +1,30 @@
 """Meme-related commands."""
+import logging
+import os
+from pathlib import Path
+
 import hikari
 import tanjun
 
-from pss3000.commands.common import StrOptions
+from pss3000.commands.common import CommandModuleInitialiser, StrOptions
+
+
+class MemeInitialiser(CommandModuleInitialiser):
+    """Initialiser for the meme module."""
+
+    def __init__(self) -> None:
+        try:
+            os.makedirs(Path("assets", "meme", "templates-global"), exist_ok=True)
+            self._initialised_successfully = True
+            logging.info("Successfully initialised meme module")
+        except PermissionError:
+            logging.error("Unable to create directory assets/meme/templates-global/")
+
+    def reload(self) -> None:
+        pass
+
+
+meme_initialiser = MemeInitialiser()
 
 meme_commands = tanjun.slash_command_group(
     "meme",
@@ -217,3 +239,4 @@ async def command_meme_template_list(
 
 component = tanjun.Component().add_slash_command(meme_commands)
 slash_loader = component.make_loader()
+command_module_initialiser = meme_initialiser

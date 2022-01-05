@@ -1,5 +1,6 @@
 """Classes and functions used by multiple command modules."""
 import re
+from abc import ABC, abstractmethod
 from typing import Any, Optional
 
 RE_CONVERT_TO_UNDERSCORE = re.compile(r"[\s\-.]")
@@ -65,3 +66,19 @@ class StrOptions:
             raise IndexError(f"Option {name} not found")
 
         return self._getattr_dict[name]
+
+
+class CommandModuleInitialiser(ABC):
+    """All modules should subclass this and export command_module_initialiser."""
+
+    _initialised_successfully = False
+
+    @abstractmethod
+    def reload(self) -> None:
+        """Called when the bot is requested to reload configuration."""
+        ...
+
+    @property
+    def initialised_successfully(self) -> bool:
+        """Whether module initialisation was successful."""
+        return self._initialised_successfully
